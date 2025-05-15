@@ -1,0 +1,8 @@
+@relation reincidencia
+
+@attribute faltas numeric
+@attribute promedio numeric
+@attribute reincidencia {si,no}
+
+@data
+8,2.5,si
