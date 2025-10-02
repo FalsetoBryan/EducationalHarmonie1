@@ -1,0 +1,34 @@
+import subprocess
+
+def run_weka_prediction(weka_jar_path, model_path, arff_file_path):
+    # Comando que invoca Weka para hacer predicciones
+    command = [
+        'java', '-cp', weka_jar_path,
+        'weka.classifiers.trees.J48',  # Puedes usar otros clasificadores de Weka
+        '-l', model_path,  # Ruta al modelo de Weka
+        '-T', arff_file_path,  # Ruta al archivo ARFF de datos de prueba
+        '-classifications', 'weka.classifiers.evaluation.output.prediction.CSV'
+    ]
+    
+    # Ejecutar el comando y capturar la salida
+    result = subprocess.run(command, capture_output=True, text=True)
+
+    # Imprimir la salida
+    if result.returncode == 0:
+        print("Predicción exitosa:")
+        print(result.stdout)  # Muestra la salida del comando
+    else:
+        print("Error al ejecutar Weka:")
+        print(result.stderr)
+
+# Ruta al archivo .jar de Weka
+weka_jar_path = "C:\Users\bryan\Downloads\weka-3-8-6\weka.jar"  # Cambia esto por la ruta de tu archivo weka.jar
+
+# Ruta al modelo entrenado
+model_path = "C:\Users\bryan\Downloads\prueba cross validation .model"  # Cambia esto por la ruta a tu modelo entrenado
+
+# Ruta al archivo de datos ARFF
+arff_file_path = "C:\Users\bryan\Downloads\faltas (2).csv.arff" # Cambia esto por la ruta a tu archivo ARFF
+
+# Llamada a la función para realizar la predicción
+run_weka_prediction(weka_jar_path, model_path, arff_file_path)
